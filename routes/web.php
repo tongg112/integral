@@ -28,3 +28,6 @@ Route::get('/about', 'StaticPagesController@about')->name('about');
 
 //// 多条路由简写
 //Route::resource('user', 'UserController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
