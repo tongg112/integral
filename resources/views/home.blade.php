@@ -14,11 +14,13 @@
                         </div>
                     @endif
 
-                    @if (Auth::check())
-                        你已经登录!
-                    @else
-                        请先登录！
-                    @endif
+                    @auth
+                        欢迎回来！
+                    @endauth
+
+                    @guest
+                        请登录！
+                    @endguest
                 </div>
             </div>
         </div>
