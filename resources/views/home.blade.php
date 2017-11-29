@@ -15,7 +15,8 @@
                     @endif
 
                     @auth
-                        欢迎回来！
+                        欢迎回来！你的积分
+                        <h1>{{ $total }}分</h1>
                     @endauth
 
                     @guest
