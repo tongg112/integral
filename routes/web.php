@@ -11,23 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/young/{age}','UserController@young')->middleware('young');
-
 // 首页
 Route::get('/', 'HomeController@home')->name('home');
 
-// home page
-Route::get('/', 'StaticPagesController@home')->name('home');
-
-// about page
-Route::get('/about', 'StaticPagesController@about')->name('about');
-
-//// 多条路由简写
-//Route::resource('user', 'UserController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
