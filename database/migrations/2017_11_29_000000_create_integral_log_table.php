@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIntegralTable extends Migration
+class CreateIntegralLogTable extends Migration
 {
     /**
      * Run the migrations.
