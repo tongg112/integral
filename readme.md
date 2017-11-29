@@ -2,4 +2,6 @@
 
 ## About Integral
 这是一个使用laravel开发的积分系统
+## 使用
+执行 php artisan migrate
 
