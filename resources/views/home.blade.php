@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    你已经登录!
+                    @if (Auth::check())
+                        你已经登录!
+                    @else
+                        请先登录！
+                    @endif
                 </div>
             </div>
         </div>

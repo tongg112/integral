@@ -13,12 +13,11 @@ class CreateIntegralTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('integral', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',191)->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('uid')->unique();
+            $table->integer('total');
+            $table->integer('available');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +30,6 @@ class CreateIntegralTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('integral');
     }
 }
