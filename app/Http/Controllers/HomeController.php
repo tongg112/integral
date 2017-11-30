@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Integral;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -49,23 +48,4 @@ class HomeController extends Controller
         return view('home',$data);
     }
 
-    /**
-     * 增加积分
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function integralIncrease(){
-
-        return view('home');
-    }
-
-    /**
-     * 扣除积分
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function integralDecrease(){
-
-        return view('home');
-    }
 }
