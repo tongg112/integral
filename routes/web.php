@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/welcome', 'HomeController@welcome')->name('welcome');
+
 // 首页
 Route::get('/', 'HomeController@index')->name('home');
 

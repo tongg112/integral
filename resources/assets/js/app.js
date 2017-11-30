@@ -4,6 +4,9 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+window.Laravel={
+    csrfToken:'{{ csrf_token() }}'
+};
 
 require('./bootstrap');
 

@@ -1,14 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <script>
-        var add_integral = function(point){
-
-            $.post('/api/increase', {'_token':'{{ csrf_token() }}','point':point},function(){
-                console.log('response');
-            });
-        };
-    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -38,6 +30,10 @@
                                 <button type="button" class="btn btn-default">增加 2</button>
                                 <button type="button" class="btn btn-default">增加 5</button>
                             </div>
+                            <div id="app">
+                                <example></example>
+                            </div>
+                            <script src="{{ asset('public/js/app.js') }}"></script>
                         @endauth
 
                         @guest
