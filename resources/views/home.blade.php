@@ -26,14 +26,11 @@
                                 </div>
                             </div>
                             <div class="btn-group btn-group-lg">
-                                <button type="button" class="btn btn-default" onclick="add_integral(1)">增加 1</button>
+                                <button type="button" class="btn btn-default">增加 1</button>
                                 <button type="button" class="btn btn-default">增加 2</button>
                                 <button type="button" class="btn btn-default">增加 5</button>
                             </div>
-                            <div id="app">
-                                <example></example>
-                            </div>
-                            <script src="{{ asset('public/js/app.js') }}"></script>
+
                         @endauth
 
                         @guest
