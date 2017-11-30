@@ -32,18 +32,18 @@ class HomeController extends Controller
         $result = $integral->where('uid',$uid)->first();
         // 没有积分信息则插入
         if(empty($result)){
-            $total = 0;
+            $available = 0;
             $integral->uid = $uid;
             $integral->total = 0;
             $integral->available = 0;
             $integral->save();
         }else{
-            $total= $result->total;
+            $available= $result->available;
         }
 
         // 展示积分信息
         $data = [
-            'total' => $total
+            'available' => $available
         ];
 
         return view('home',$data);
