@@ -5,3 +5,4 @@
 ## 使用
 执行 php artisan migrate
 
+执行 npm run dev
