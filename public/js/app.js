@@ -42970,10 +42970,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+    data: function data() {
+        return {
+            available: ''
+        };
+    },
+
+    methods: {
+        my_integral: function my_integral() {
+            var _this = this;
+
+            axios.post('/api/home', {}).then(function (response) {
+                _this.available = response.data.available;
+            });
+        },
+        add_integral: function add_integral(point) {
+            alert(point);
+        }
+    },
+    created: function created() {
+        this.my_integral();
     }
 });
 
@@ -42985,29 +43018,91 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0, false, false)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [_vm._v("主页")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", {}, [
+              _vm._v(
+                "\n                        欢迎回来！你的积分\n                        "
+              ),
+              _c("h1", [_vm._v(_vm._s(_vm.available) + "分")])
+            ]),
+            _vm._v(" "),
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "btn-group btn-group-lg" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.add_integral(1)
+                    }
+                  }
+                },
+                [_vm._v("增加 1")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.add_integral(2)
+                    }
+                  }
+                },
+                [_vm._v("增加 2")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.add_integral(5)
+                    }
+                  }
+                },
+                [_vm._v("增加 5")]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                  这是一个vue的页面测试\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "progress" }, [
+      _c(
+        "div",
+        {
+          staticClass: "progress-bar",
+          staticStyle: { width: "40%" },
+          attrs: {
+            role: "progressbar",
+            "aria-valuenow": "60",
+            "aria-valuemin": "0",
+            "aria-valuemax": "100"
+          }
+        },
+        [_c("span", { staticClass: "sr-only" }, [_vm._v("40% 完成")])]
+      )
     ])
   }
 ]
