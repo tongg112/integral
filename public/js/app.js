@@ -42984,25 +42984,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            available: ''
+            available: '加载中……',
+            cost: 0
         };
     },
 
     methods: {
         my_integral: function my_integral() {
-            var _this = this;
-
             axios.post('/api/home', {}).then(function (response) {
-                _this.available = response.data.available;
+                this.available = response.data.available;
+            }.bind(this)).catch(function (err) {
+                console.log(err);
             });
         },
         add_integral: function add_integral(point) {
-            alert(point);
+            var _this = this;
+
+            axios.post('/api/change', { point: point }).then(function (response) {
+                _this.available = response.data.available;
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        cost_integral: function cost_integral(point) {
+            var _this2 = this;
+
+            if (!point) {
+                return true;
+            }
+            axios.post('/api/change', { point: -point }).then(function (response) {
+                _this2.available = response.data.available;
+            }).catch(function (err) {
+                console.log(err);
+            });
         }
     },
     created: function created() {
@@ -43033,6 +43062,51 @@ var render = function() {
             ]),
             _vm._v(" "),
             _vm._m(0, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cost,
+                    expression: "cost"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "code", type: "text", placeholder: "花费" },
+                domProps: { value: _vm.cost },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.cost = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "input-group-btn" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.cost_integral(_vm.cost)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            确认消耗" +
+                        _vm._s(_vm.cost)
+                    )
+                  ]
+                )
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "btn-group btn-group-lg" }, [
               _c(

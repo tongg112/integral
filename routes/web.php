@@ -20,3 +20,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/api/home', 'ApiController@home')->name('home');
+Route::post('/api/change', 'ApiController@change_integral')->name('change_integral');

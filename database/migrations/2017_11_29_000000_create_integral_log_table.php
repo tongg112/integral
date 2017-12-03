@@ -15,10 +15,10 @@ class CreateIntegralLogTable extends Migration
     {
         Schema::create('integral_log', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uid')->unique();
+            $table->integer('uid');
             $table->integer('changes');
-            $table->string('types');
-            $table->string('remark');
+            $table->string('types')->default(0);
+            $table->string('remark')->default('');
             $table->timestamps();
             $table->softDeletes();
         });

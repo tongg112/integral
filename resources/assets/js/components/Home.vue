@@ -16,11 +16,21 @@
                                 <span class="sr-only">40% 完成</span>
                             </div>
                         </div>
+
+                        <div class="input-group">
+                            <input name="code" type="text" class="form-control" placeholder="花费" v-model="cost">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" @click="cost_integral(cost)">
+                                确认消耗{{ cost }}</button>
+                            </span>
+                        </div>
+
                         <div class="btn-group btn-group-lg">
                             <button type="button" class="btn btn-default" @click="add_integral(1)">增加 1</button>
                             <button type="button" class="btn btn-default" @click="add_integral(2)">增加 2</button>
                             <button type="button" class="btn btn-default" @click="add_integral(5)">增加 5</button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -33,19 +43,40 @@
     export default {
         data() {
             return {
-                available: ''
+                available: '加载中……',
+                cost: 0
             };
         },
         methods: {
             my_integral() {
-                axios.post('/api/home', {}).then(
+                axios.post('/api/home', {}).then(function (response) {
+                        this.available = response.data.available;
+                    }.bind(this)
+                ).catch(function (err) {
+                    console.log(err)
+                });
+            },
+            add_integral(point) {
+                axios.post('/api/change', {point: point}).then(
                     response => {
                         this.available = response.data.available;
                     }
-                );
+                ).catch(function (err) {
+                    console.log(err)
+                });
             },
-            add_integral(point){
-                alert(point);
+            cost_integral(point) {
+
+                if (!point) {
+                    return true;
+                }
+                axios.post('/api/change', {point: -point}).then(
+                    response => {
+                        this.available = response.data.available;
+                    }
+                ).catch(function (err) {
+                    console.log(err)
+                });
             }
         },
         created() {
