@@ -24,7 +24,7 @@
                                 确认消耗{{ cost }}</button>
                             </span>
                         </div>
-
+                        <br />
                         <div class="btn-group btn-group-lg">
                             <button type="button" class="btn btn-default" @click="add_integral(1)">增加 1</button>
                             <button type="button" class="btn btn-default" @click="add_integral(2)">增加 2</button>

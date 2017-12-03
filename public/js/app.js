@@ -43108,6 +43108,8 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
             _c("div", { staticClass: "btn-group btn-group-lg" }, [
               _c(
                 "button",
