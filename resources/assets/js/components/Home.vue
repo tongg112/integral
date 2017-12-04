@@ -17,6 +17,11 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label>备注</label>
+                            <input type="text" class="form-control" placeholder="描述" v-model="remark">
+                        </div>
+
                         <div class="input-group">
                             <input name="code" type="text" class="form-control" placeholder="花费" v-model="cost">
                             <span class="input-group-btn">
@@ -44,36 +49,52 @@
         data() {
             return {
                 available: '加载中……',
-                cost: 0
+                cost: 0,
+                remark: ''
             };
         },
         methods: {
             my_integral() {
                 axios.post('/api/home', {}).then(function (response) {
                         this.available = response.data.available;
+                        this.remark = '';
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
                 });
             },
             add_integral(point) {
-                axios.post('/api/change', {point: point}).then(
-                    response => {
+
+                if (!this.remark) {
+                    return true;
+                }
+
+                let req = {
+                    point: point,
+                    remark: this.remark
+                };
+
+                axios.post('/api/change', req).then(function (response) {
                         this.available = response.data.available;
-                    }
+                        this.remark = '';
+                    }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
                 });
             },
             cost_integral(point) {
 
-                if (!point) {
+                if (!point || !this.remark) {
                     return true;
                 }
-                axios.post('/api/change', {point: -point}).then(
-                    response => {
+                let req = {
+                    point: -point,
+                    remark: this.remark
+                };
+                axios.post('/api/change', req).then(function (response) {
                         this.available = response.data.available;
-                    }
+                        this.remark = '';
+                    }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
                 });

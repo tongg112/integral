@@ -60,19 +60,20 @@ class ApiController extends Controller
         // 获取积分信息
         $uid = Auth::id();
 
-        // 提取参数
-        $changePoint = $request['point'];
-
         // 插入数据
-        DB::transaction(function () use ($changePoint, $uid) {
+        DB::transaction(function () use ($request, $uid) {
             $integral = Integral::where('uid', $uid);
-            $integral->increment('total', $changePoint);
-            $integral->increment('available', $changePoint);
+            // 增加的积分就增加总数，否则不变化总数
+            if($request['point'] >0 ){
+                $integral->increment('total', $request['point']);
+            }
+            $integral->increment('available', $request['point']);
 
             $integralLog = new IntegralLog();
             $insertData = [
                 'uid' => $uid,
-                'changes' => $changePoint,
+                'changes' => $request['point'],
+                'remark' => $request['remark'],
             ];
 
             $integralLog->fill($insertData);
