@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>备注</label>
+                            <label>备注(必填)</label>
                             <input type="text" class="form-control" placeholder="描述" v-model="remark">
                         </div>
 
