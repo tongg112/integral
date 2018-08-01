@@ -66,6 +66,7 @@
             add_integral(point) {
 
                 if (!this.remark) {
+                    alert('请输入备注信息！');
                     return true;
                 }
 
@@ -85,6 +86,11 @@
             cost_integral(point) {
 
                 if (!point || !this.remark) {
+                    if(!point){
+                        alert('请输入需要扣减的积分数！');
+                    }else{
+                        alert('请输入备注信息！');
+                    }
                     return true;
                 }
                 let req = {

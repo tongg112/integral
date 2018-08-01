@@ -43402,6 +43402,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         add_integral: function add_integral(point) {
 
             if (!this.remark) {
+                alert('请输入备注信息！');
                 return true;
             }
 
@@ -43420,6 +43421,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         cost_integral: function cost_integral(point) {
 
             if (!point || !this.remark) {
+                if (!point) {
+                    alert('请输入需要扣减的积分数！');
+                } else {
+                    alert('请输入备注信息！');
+                }
                 return true;
             }
             var req = {
