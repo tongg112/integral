@@ -43400,18 +43400,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43428,6 +43416,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/home', {}).then(function (response) {
                 this.available = response.data.available;
                 this.remark = '';
+            }.bind(this)).catch(function (err) {
+                console.log(err);
+            });
+        },
+        integral_list: function integral_list() {
+            axios.post('/api/integral_list', {}).then(function (response) {
+                this.integral_list = response.data.integral_list;
             }.bind(this)).catch(function (err) {
                 console.log(err);
             });
@@ -43475,6 +43470,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.my_integral();
+        this.integral_list();
     }
 });
 
@@ -43620,7 +43616,26 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "panel-heading" }, [_vm._v("最近明细")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c("table", { staticClass: "table table-striped" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.integral_list, function(integral_row) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(integral_row.created_at))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(integral_row.changes))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(integral_row.remark))])
+                  ])
+                })
+              )
+            ])
+          ])
         ])
       ])
     ])
@@ -43652,51 +43667,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-body" }, [
-      _c("table", { staticClass: "table table-striped" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", [_vm._v("#")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("First Name")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Last Name")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Username")])
-          ])
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("时间")]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Mark")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Otto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("@mdo")])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Jacob")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Thornton")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("@fat")])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Larry")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("the Bird")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("@twitter")])
-          ])
-        ])
+        _c("th", [_vm._v("积分")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("备注")])
       ])
     ])
   }

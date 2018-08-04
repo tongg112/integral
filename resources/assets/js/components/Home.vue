@@ -50,10 +50,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                            <tr v-for="integral_row in integral_list">
+                                <td>{{ integral_row.created_at}}</td>
+                                <td>{{ integral_row.changes}}</td>
+                                <td>{{ integral_row.remark}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -79,6 +79,14 @@
                 axios.post('/api/home', {}).then(function (response) {
                         this.available = response.data.available;
                         this.remark = '';
+                    }.bind(this)
+                ).catch(function (err) {
+                    console.log(err)
+                });
+            },
+            integral_list() {
+                axios.post('/api/integral_list', {}).then(function (response) {
+                        this.integral_list = response.data.integral_list;
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
@@ -129,6 +137,7 @@
         },
         created() {
             this.my_integral();
+            this.integral_list();
         }
     }
 
