@@ -102,7 +102,7 @@ class ApiController extends Controller
         $uid = Auth::id();
 
         // 查询记录
-        $integral_list = IntegralLog::where('uid', $uid)->get()->toArray();
+        $integral_list = IntegralLog::where('uid', $uid)->orderBy('id','desc')->get()->toArray();
 
         $data = [
             'integral_list' => $integral_list
