@@ -43400,6 +43400,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43640,7 +43641,22 @@ var render = function() {
                   return _c("tr", [
                     _c("td", [_vm._v(_vm._s(integral_row.created_at))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(integral_row.changes))]),
+                    _c(
+                      "td",
+                      {
+                        class: {
+                          "text-success": integral_row.changes > 0,
+                          "text-danger": integral_row.changes < 0
+                        }
+                      },
+                      [
+                        _vm._v(
+                          " " +
+                            _vm._s(integral_row.changes > 0 ? "+" : "") +
+                            _vm._s(integral_row.changes)
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(integral_row.remark))])
                   ])

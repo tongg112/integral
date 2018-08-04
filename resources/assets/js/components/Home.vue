@@ -50,9 +50,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="integral_row in integral_list">
+                            <tr v-for="integral_row in integral_list" >
                                 <td>{{ integral_row.created_at}}</td>
-                                <td>{{ integral_row.changes}}</td>
+                                <!-- 积分变化的文字颜色 -->
+                                <td v-bind:class="{ 'text-success': integral_row.changes > 0, 'text-danger': integral_row.changes < 0 }" > {{ integral_row.changes > 0 ? '+' : ''}}{{ integral_row.changes}}</td>
                                 <td>{{ integral_row.remark}}</td>
                             </tr>
                             </tbody>
