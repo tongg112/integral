@@ -43407,7 +43407,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             available: '加载中……',
             cost: 0,
-            remark: ''
+            remark: '',
+            integral_list: []
         };
     },
 
@@ -43420,7 +43421,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(err);
             });
         },
-        integral_list: function integral_list() {
+        get_integral_list: function get_integral_list() {
             axios.post('/api/integral_list', {}).then(function (response) {
                 this.integral_list = response.data.integral_list;
             }.bind(this)).catch(function (err) {
@@ -43470,7 +43471,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.my_integral();
-        this.integral_list();
+        this.get_integral_list();
     }
 });
 
@@ -43616,7 +43617,18 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-heading" }, [_vm._v("最近明细")]),
+          _c(
+            "div",
+            {
+              staticClass: "panel-heading",
+              on: {
+                click: function($event) {
+                  _vm.get_integral_list()
+                }
+              }
+            },
+            [_vm._v("最近明细(点击刷新)")]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
             _c("table", { staticClass: "table table-striped" }, [

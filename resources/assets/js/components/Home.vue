@@ -38,7 +38,7 @@
 
                     </div>
 
-                    <div class="panel-heading">最近明细</div>
+                    <div class="panel-heading" @click="get_integral_list()">最近明细(点击刷新)</div>
 
                     <div class="panel-body">
                         <table class="table table-striped">
@@ -71,7 +71,8 @@
             return {
                 available: '加载中……',
                 cost: 0,
-                remark: ''
+                remark: '',
+                integral_list:[]
             };
         },
         methods: {
@@ -84,7 +85,7 @@
                     console.log(err)
                 });
             },
-            integral_list() {
+            get_integral_list() {
                 axios.post('/api/integral_list', {}).then(function (response) {
                         this.integral_list = response.data.integral_list;
                     }.bind(this)
@@ -137,7 +138,7 @@
         },
         created() {
             this.my_integral();
-            this.integral_list();
+            this.get_integral_list();
         }
     }
 
