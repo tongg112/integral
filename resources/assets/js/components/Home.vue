@@ -109,6 +109,7 @@
                 axios.post('/api/change', req).then(function (response) {
                         this.available = response.data.available;
                         this.remark = '';
+                        this.get_integral_list();
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
@@ -131,6 +132,7 @@
                 axios.post('/api/change', req).then(function (response) {
                         this.available = response.data.available;
                         this.remark = '';
+                        this.get_integral_list();
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)

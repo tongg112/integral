@@ -43444,6 +43444,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/change', req).then(function (response) {
                 this.available = response.data.available;
                 this.remark = '';
+                this.get_integral_list();
             }.bind(this)).catch(function (err) {
                 console.log(err);
             });
@@ -43465,6 +43466,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/change', req).then(function (response) {
                 this.available = response.data.available;
                 this.remark = '';
+                this.get_integral_list();
             }.bind(this)).catch(function (err) {
                 console.log(err);
             });
