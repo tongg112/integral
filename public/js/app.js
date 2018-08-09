@@ -43399,15 +43399,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             available: '加载中……',
-            cost: 0,
+            change: '',
             remark: '',
             integral_list: []
         };
@@ -43417,7 +43415,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         my_integral: function my_integral() {
             axios.post('/api/home', {}).then(function (response) {
                 this.available = response.data.available;
-                this.remark = '';
+                init_data(this);
             }.bind(this)).catch(function (err) {
                 console.log(err);
             });
@@ -43429,43 +43427,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(err);
             });
         },
-        add_integral: function add_integral(point) {
+        add_integral: function add_integral() {
 
-            if (!this.remark) {
-                alert('请输入备注信息！');
+            if (!validate_data(this)) {
                 return true;
             }
 
             var req = {
-                point: point,
+                point: this.change,
                 remark: this.remark
             };
 
             axios.post('/api/change', req).then(function (response) {
                 this.available = response.data.available;
-                this.remark = '';
+                init_data(this);
                 this.get_integral_list();
             }.bind(this)).catch(function (err) {
                 console.log(err);
             });
         },
-        cost_integral: function cost_integral(point) {
+        cost_integral: function cost_integral() {
 
-            if (!point || !this.remark) {
-                if (!point) {
-                    alert('请输入需要扣减的积分数！');
-                } else {
-                    alert('请输入备注信息！');
-                }
+            if (!validate_data(this)) {
                 return true;
             }
+
             var req = {
-                point: -point,
+                point: -this.change,
                 remark: this.remark
             };
             axios.post('/api/change', req).then(function (response) {
                 this.available = response.data.available;
-                this.remark = '';
+                init_data(this);
                 this.get_integral_list();
             }.bind(this)).catch(function (err) {
                 console.log(err);
@@ -43477,6 +43470,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.get_integral_list();
     }
 });
+
+// 初始化变更积分与备注
+function init_data(data) {
+    data.change = '';
+    data.remark = '';
+}
+
+function validate_data(data) {
+
+    if (!data.change) {
+        alert('请输入需要变更的积分数！');
+        return false;
+    }
+
+    if (!data.remark) {
+        alert('请输入备注信息！');
+        return false;
+    }
+
+    return true;
+}
 
 /***/ }),
 /* 44 */
@@ -43534,19 +43548,24 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.cost,
-                    expression: "cost"
+                    value: _vm.change,
+                    expression: "change"
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { name: "code", type: "text", placeholder: "花费" },
-                domProps: { value: _vm.cost },
+                attrs: {
+                  name: "code",
+                  type: "text",
+                  maxlength: "3",
+                  placeholder: "变更积分"
+                },
+                domProps: { value: _vm.change },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.cost = $event.target.value
+                    _vm.change = $event.target.value
                   }
                 }
               }),
@@ -43559,64 +43578,39 @@ var render = function() {
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
-                        _vm.cost_integral(_vm.cost)
+                        _vm.cost_integral()
                       }
                     }
                   },
                   [
                     _vm._v(
                       "\n                            确认消耗" +
-                        _vm._s(_vm.cost)
+                        _vm._s(_vm.change)
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "input-group-btn" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.add_integral()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            确认增加" +
+                        _vm._s(_vm.change)
                     )
                   ]
                 )
               ])
-            ]),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn-group btn-group-lg" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-default",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.add_integral(1)
-                    }
-                  }
-                },
-                [_vm._v("增加 1")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-default",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.add_integral(2)
-                    }
-                  }
-                },
-                [_vm._v("增加 2")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-default",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.add_integral(5)
-                    }
-                  }
-                },
-                [_vm._v("增加 5")]
-              )
             ])
           ]),
           _vm._v(" "),

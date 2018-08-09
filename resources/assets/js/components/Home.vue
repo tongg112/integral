@@ -23,17 +23,15 @@
                         </div>
 
                         <div class="input-group">
-                            <input name="code" type="text" class="form-control" placeholder="花费" v-model="cost">
+                            <input name="code" type="text" class="form-control" maxlength="3" placeholder="变更积分" v-model="change">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" @click="cost_integral(cost)">
-                                确认消耗{{ cost }}</button>
+                                <button class="btn btn-default" type="button" @click="cost_integral()">
+                                确认消耗{{ change }}</button>
                             </span>
-                        </div>
-                        <br />
-                        <div class="btn-group btn-group-lg">
-                            <button type="button" class="btn btn-default" @click="add_integral(1)">增加 1</button>
-                            <button type="button" class="btn btn-default" @click="add_integral(2)">增加 2</button>
-                            <button type="button" class="btn btn-default" @click="add_integral(5)">增加 5</button>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" @click="add_integral()">
+                                确认增加{{ change }}</button>
+                            </span>
                         </div>
 
                     </div>
@@ -71,7 +69,7 @@
         data() {
             return {
                 available: '加载中……',
-                cost: 0,
+                change: '',
                 remark: '',
                 integral_list:[]
             };
@@ -80,7 +78,7 @@
             my_integral() {
                 axios.post('/api/home', {}).then(function (response) {
                         this.available = response.data.available;
-                        this.remark = '';
+                        init_data(this);
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
@@ -94,44 +92,39 @@
                     console.log(err)
                 });
             },
-            add_integral(point) {
+            add_integral() {
 
-                if (!this.remark) {
-                    alert('请输入备注信息！');
+                if(!validate_data(this)){
                     return true;
                 }
 
                 let req = {
-                    point: point,
+                    point: this.change,
                     remark: this.remark
                 };
 
                 axios.post('/api/change', req).then(function (response) {
                         this.available = response.data.available;
-                        this.remark = '';
+                        init_data(this);
                         this.get_integral_list();
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
                 });
             },
-            cost_integral(point) {
+            cost_integral() {
 
-                if (!point || !this.remark) {
-                    if(!point){
-                        alert('请输入需要扣减的积分数！');
-                    }else{
-                        alert('请输入备注信息！');
-                    }
+                if(!validate_data(this)){
                     return true;
                 }
+
                 let req = {
-                    point: -point,
+                    point: -this.change,
                     remark: this.remark
                 };
                 axios.post('/api/change', req).then(function (response) {
                         this.available = response.data.available;
-                        this.remark = '';
+                        init_data(this);
                         this.get_integral_list();
                     }.bind(this)
                 ).catch(function (err) {
@@ -145,5 +138,25 @@
         }
     }
 
+    // 初始化变更积分与备注
+    function init_data(data) {
+        data.change = '';
+        data.remark = '';
+    }
+
+    function validate_data(data) {
+
+        if(!data.change){
+            alert('请输入需要变更的积分数！');
+            return false;
+        }
+
+        if(!data.remark){
+            alert('请输入备注信息！');
+            return false;
+        }
+
+        return true;
+    }
 
 </script>
