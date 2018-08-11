@@ -43400,11 +43400,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
+// 获取等级
+function get_lvl(data) {
+    var n = 0;
+    while (Math.pow(2, n) <= data) {
+        n = n + 1;
+    }
+    return n - 1;
+}
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             available: '加载中……',
+            lvl: '',
             change: '',
             remark: '',
             integral_list: []
@@ -43423,6 +43431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         get_integral_list: function get_integral_list() {
             axios.post('/api/integral_list', {}).then(function (response) {
                 this.integral_list = response.data.integral_list;
+                this.lvl = get_lvl(this.available);
             }.bind(this)).catch(function (err) {
                 console.log(err);
             });
@@ -43504,7 +43513,9 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
         _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [_vm._v("主页")]),
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("当前等级: " + _vm._s(_vm.lvl))
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
             _c("div", {}, [

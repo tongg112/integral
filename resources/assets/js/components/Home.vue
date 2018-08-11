@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">主页</div>
+                    <div class="panel-heading">当前等级: {{ lvl }}</div>
 
                     <div class="panel-body">
                         <div class="">
@@ -64,11 +64,19 @@
 </template>
 
 <script>
-
+    // 获取等级
+    function get_lvl(data) {
+        let n = 0;
+        while (Math.pow(2,n) <= data){
+            n = n + 1;
+        }
+        return n - 1;
+    }
     export default {
         data() {
             return {
                 available: '加载中……',
+                lvl: '',
                 change: '',
                 remark: '',
                 integral_list:[]
@@ -87,6 +95,7 @@
             get_integral_list() {
                 axios.post('/api/integral_list', {}).then(function (response) {
                         this.integral_list = response.data.integral_list;
+                        this.lvl = get_lvl(this.available);
                     }.bind(this)
                 ).catch(function (err) {
                     console.log(err)
