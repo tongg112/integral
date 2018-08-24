@@ -86,6 +86,7 @@
             my_integral() {
                 axios.post('/api/home', {}).then(function (response) {
                         this.available = response.data.available;
+                        this.lvl = get_lvl(this.available);
                         init_data(this);
                     }.bind(this)
                 ).catch(function (err) {
