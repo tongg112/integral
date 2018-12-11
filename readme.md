@@ -5,6 +5,12 @@
 ## 使用
 执行 `composer install`
 
+复制.env.example 到 .env 并修改对应参数
+
+生成appKey：php artisan key:generate
+
+创建数据库，库名 integral
+
 执行 `php artisan migrate`
 
 执行 `npm install`
@@ -38,6 +44,9 @@ v0.5.5
     .
     .
     .
+    
+v0.5.6
+更新.env与readme
     
 ---
 ## 部署详细步骤
